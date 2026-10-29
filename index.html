@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nino Pareshishvili Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a bento board of work on the home view; each project opens as its own case page in the same site (hash views). */
+:root {
+  --bg: #F2F2F5;
+  --surface: #FFFFFF;
+  --ink: #0C0B14;
+  --muted: #6A687A;
+  --line: #E2E1EA;
+  --accent: #5B4FE9;
+  --accent-soft: #ECEAFE;
+  --sans: 'Geist', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg:#0B0B10; --surface:#15141D; --ink:#F1F0F7; --muted:#9C99B0; --line:#26252F; --accent:#8E85FF; --accent-soft:#1E1C33; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg:#0B0B10; --surface:#15141D; --ink:#F1F0F7; --muted:#9C99B0; --line:#26252F; --accent:#8E85FF; --accent-soft:#1E1C33; color-scheme: dark; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); }
+
+/* Nav */
+.nav { position: sticky; top: 14px; z-index: 30; display: flex; justify-content: center; padding: 0 16px; }
+.nav-inner { display: flex; align-items: center; gap: 6px; padding: 6px; background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 8px 30px -12px rgba(20,16,60,.18); }
+.nav-inner img { width: 34px; height: 34px; border-radius: 50%; }
+.nav-inner a.l { padding: 8px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 500; color: var(--muted); }
+.nav-inner a.l:hover { color: var(--ink); background: var(--bg); }
+.nav-inner a.cta { padding: 8px 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 14.5px; font-weight: 600; }
+
+/* Views */
+.view { display: none; }
+.view.on { display: block; animation: rise .45s cubic-bezier(.2,.7,.2,1); }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .view.on { animation: none; } * { transition: none !important; } }
+
+/* Hero */
+.hero { padding: 88px 0 56px; display: grid; gap: 26px; }
+.avail { display: inline-flex; align-items: center; gap: 10px; width: fit-content; padding: 7px 14px 7px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 500; }
+.avail i { width: 9px; height: 9px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,.18); }
+.hero h1 { font-size: clamp(46px, 8.2vw, 112px); line-height: .95; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; max-width: 13ch; }
+.hero h1 span { color: var(--accent); }
+.hero .role { font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; letter-spacing: -.02em; color: var(--ink); max-width: none; }
+.hero .role span { color: var(--accent); }
+.hero p { font-size: 19px; color: var(--muted); max-width: 54ch; }
+
+.stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 640px; margin-top: 6px; }
+.stepper div { display: grid; gap: 8px; }
+.stepper .bar { height: 6px; border-radius: 6px; background: var(--line); overflow: hidden; }
+.stepper .bar b { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 6px; animation: fill .7s ease forwards; }
+.stepper div:nth-child(2) .bar b { animation-delay: .6s; }
+.stepper div:nth-child(3) .bar b { animation-delay: 1.2s; }
+.stepper div:nth-child(4) .bar b { animation-delay: 1.8s; background: #22C55E; }
+@keyframes fill { to { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .stepper .bar b { animation: none; width: 100%; } }
+.stepper span { font-size: 13.5px; font-weight: 500; color: var(--muted); }
+
+/* Bento */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding-bottom: 24px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; position: relative; display: flex; flex-direction: column; transition: transform .25s ease, box-shadow .25s ease; }
+a.tile:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(30,20,90,.28); }
+.t-feature { grid-column: span 6; }
+.t-half { grid-column: span 3; }
+.t-third { grid-column: span 2; }
+.tile .art { flex: 1; min-height: 260px; position: relative; overflow: hidden; }
+.t-feature .art { min-height: 420px; }
+.tile .cap { padding: 20px 24px 22px; display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.tile .cap h3 { font-size: 22px; letter-spacing: -.02em; font-weight: 600; line-height: 1.2; }
+.tile .cap p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+.arrow { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); border: 1px solid var(--line); transition: background .2s, color .2s; }
+a.tile:hover .arrow { background: var(--accent); color: #fff; border-color: var(--accent); }
+.badge { position: absolute; top: 18px; left: 18px; z-index: 2; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 600; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(8px); }
+
+/* Fulltime art */
+.a-ft { background: radial-gradient(120% 90% at 85% 10%, #26303D 0%, #0E1116 55%); display: grid; place-items: center; }
+.phone { width: 250px; height: 380px; border-radius: 34px; background: #0E1116; border: 6px solid #232833; padding: 18px 14px; display: grid; gap: 10px; align-content: start; transform: translateY(34px); box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); }
+.phone .h { color: #F2F4F7; font-weight: 600; font-size: 15px; display: flex; justify-content: space-between; }
+.phone .h em { font-style: normal; color: #FF3B30; font-size: 11px; font-family: var(--mono); }
+.m { background: #171B22; border-radius: 14px; padding: 12px; display: grid; gap: 10px; }
+.m .t { color: #F2F4F7; font-size: 12.5px; font-weight: 600; }
+.m .t small { display: block; color: #9AA3B2; font-weight: 400; font-size: 11px; }
+.os { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.os div { background: #222833; border-radius: 9px; text-align: center; padding: 5px 0; color: #F2F4F7; font-weight: 600; font-size: 13px; font-variant-numeric: tabular-nums; }
+.os div small { display: block; color: #9AA3B2; font-size: 10px; font-weight: 500; }
+.os .s { background: #C6F432; color: #0E1116; } .os .s small { color: #0E1116; }
+.os .u { box-shadow: inset 0 0 0 1.5px #2ECC71; color: #2ECC71; }
+.slip { margin-top: 4px; background: #C6F432; color: #0E1116; border-radius: 12px; padding: 10px 12px; font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
+.ft-word { position: absolute; left: 32px; bottom: 26px; color: #F2F4F7; font-size: clamp(40px, 6vw, 84px); font-weight: 700; letter-spacing: -.05em; line-height: 1; }
+.ft-word small { display: block; font-size: 14px; letter-spacing: 0; font-weight: 500; color: #9AA3B2; margin-top: 8px; }
+
+/* GSG art */
+.a-gsg { background: #1C1630; display: grid; grid-template-columns: 1fr 1fr; }
+.a-gsg .l { padding: 60px 26px 26px; display: flex; flex-direction: column; justify-content: space-between; }
+.a-gsg .l b { color: #F4EFE3; font-size: 64px; font-weight: 800; letter-spacing: -.05em; line-height: .9; }
+.a-gsg .dots { display: flex; gap: 8px; }
+.a-gsg .dots i { width: 30px; height: 30px; border-radius: 50%; }
+.a-gsg .r { background: #F4EFE3; padding: 26px 22px; display: grid; gap: 10px; align-content: center; }
+.a-gsg .r div { height: 12px; border-radius: 6px; background: #8E7CF0; }
+.a-gsg .r .k { background: #1C1630; width: 55%; } .a-gsg .r .g { background: #CFF06A; height: 40px; border-radius: 10px; }
+
+/* CT LAB art */
+.a-ct { background: #E7EFF4; display: grid; grid-template-columns: 64px 1fr; }
+.a-ct .side { background: #0F3B57; }
+.a-ct .body { padding: 60px 18px 18px; display: grid; gap: 8px; align-content: start; }
+.a-ct .row { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 8px; align-items: center; background: #fff; border-radius: 10px; padding: 9px 11px; font-size: 12px; color: #0F3B57; font-weight: 600; }
+.pill { padding: 2px 8px; border-radius: 999px; font-size: 10.5px; }
+.ok { background: #D6F2E2; color: #146C3E; } .warn { background: #FFE9C7; color: #8A5300; } .bad { background: #FFDADA; color: #9B1C1C; }
+.a-ct .badge, .a-gsg .badge { }
+.badge.dark { background: rgba(15,59,87,.08); color: #0F3B57; border-color: rgba(15,59,87,.18); }
+
+/* Info tiles */
+.t-info { padding: 26px; display: grid; gap: 14px; align-content: space-between; min-height: 240px; }
+.t-info h4 { font-size: 20px; letter-spacing: -.02em; font-weight: 600; }
+.t-info p { color: var(--muted); font-size: 15px; }
+.t-nda { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.t-nda p { color: color-mix(in srgb, var(--bg) 70%, transparent); }
+.t-nda .mono { color: color-mix(in srgb, var(--bg) 60%, transparent); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 6px 12px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); font-size: 13.5px; font-weight: 500; }
+.chip.ai { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+
+/* Sections */
+.sec { padding: 72px 0 24px; }
+.sec-h { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+.sec-h h2 { font-size: clamp(32px, 4.4vw, 54px); letter-spacing: -.04em; line-height: 1; font-weight: 700; }
+.xp { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 8px 26px; }
+.xp .r { display: grid; grid-template-columns: 210px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.xp .r:last-child { border-bottom: 0; }
+.xp h4 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+.xp p { color: var(--muted); font-size: 15px; margin-top: 2px; max-width: 60ch; }
+
+.contact { margin: 72px 0 40px; background: var(--ink); color: var(--bg); border-radius: 36px; padding: clamp(32px, 6vw, 72px); display: grid; gap: 28px; }
+.contact h2 { font-size: clamp(38px, 6vw, 80px); letter-spacing: -.05em; line-height: .95; font-weight: 700; max-width: 14ch; }
+.contact h2 span { color: #A49DFF; }
+.contact .links { display: flex; flex-wrap: wrap; gap: 10px; }
+.contact .links a { padding: 12px 18px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); font-weight: 500; font-size: 15.5px; }
+.contact .links a:hover { background: var(--bg); color: var(--ink); }
+.contact .links a.main { background: #A49DFF; color: #0C0B14; border-color: #A49DFF; }
+footer { padding: 10px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+/* Case pages */
+.case-top { padding: 72px 0 28px; display: grid; gap: 18px; }
+.back { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-weight: 500; font-size: 15px; width: fit-content; }
+.back:hover { color: var(--ink); }
+.case-top h1 { font-size: clamp(40px, 6.6vw, 88px); letter-spacing: -.05em; line-height: .95; font-weight: 700; max-width: 16ch; text-wrap: balance; }
+.case-top p.lead { font-size: 20px; color: var(--muted); max-width: 58ch; }
+.case-hero { border-radius: 32px; overflow: hidden; border: 1px solid var(--line); }
+.case-hero .art { min-height: 460px; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0 8px; }
+.facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px 18px; display: grid; gap: 4px; }
+.facts b { font-weight: 600; font-size: 15.5px; }
+.block { display: grid; grid-template-columns: 260px 1fr; gap: 32px; padding: 44px 0; border-bottom: 1px solid var(--line); }
+.block:last-of-type { border-bottom: 0; }
+.block h3 { font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
+.block .body { display: grid; gap: 16px; max-width: 70ch; }
+.block .body p { color: var(--muted); }
+.block .body p strong { color: var(--ink); font-weight: 600; }
+.decisions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.decisions div { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: grid; gap: 6px; }
+.decisions b { font-weight: 600; font-size: 16px; }
+.decisions span { color: var(--muted); font-size: 14.5px; }
+.decisions .n { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat div { background: var(--accent-soft); border-radius: 18px; padding: 18px; display: grid; gap: 4px; }
+.stat b { font-size: 32px; letter-spacing: -.04em; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--muted); }
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 12px 0 8px; }
+.shot { border-radius: 24px; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center; padding: 20px; color: var(--muted); font-size: 14.5px; position: relative; overflow: hidden; }
+.shot.wide { grid-column: span 2; aspect-ratio: 16 / 7; }
+.shot::before { content: ''; position: absolute; inset: 14px; border: 1.5px dashed var(--line); border-radius: 16px; }
+.shot span { position: relative; display: grid; gap: 4px; }
+.shot span b { color: var(--ink); font-weight: 600; }
+.next { margin: 40px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 28px; border-radius: 28px; background: var(--surface); border: 1px solid var(--line); }
+.next b { font-size: clamp(24px, 3.4vw, 40px); letter-spacing: -.04em; font-weight: 700; }
+.next:hover { border-color: var(--accent); }
+
+
+img.fill { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+img.fill.top { object-position: top left; }
+.a-shot { background: #F6F7FA; }
+.t-half .art { aspect-ratio: 16 / 10; min-height: 0; }
+figure { margin: 0; }
+.case-hero img { width: 100%; height: auto; }
+.case-hero.light, .shot-img.light { background: #fff; }
+.shot-img { border-radius: 28px; overflow: hidden; border: 1px solid var(--line); margin: 0 0 8px; }
+.shot-img img { width: 100%; height: auto; }
+.shot-img figcaption { padding: 14px 18px; font-size: 14.5px; color: #555; border-top: 1px solid #eee; }
+.gallery .shot-img { margin: 0; }
+
+
+.ft-hero .phone { transform: none; }
+.toc { position: sticky; top: 76px; z-index: 10; display: flex; gap: 6px; overflow-x: auto; padding: 8px; margin: 24px 0 0; background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 999px; scrollbar-width: none; }
+.toc a { flex: none; padding: 7px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.toc a:hover { background: var(--bg); color: var(--ink); }
+.block { scroll-margin-top: 140px; }
+.src, .note { font-size: 13.5px !important; }
+.src a { text-decoration: underline; }
+.funnel { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.fs { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 6px; align-content: start; position: relative; }
+.fs b { font-size: 16px; }
+.fs p { font-size: 13.5px !important; }
+.fs i { font-style: normal; font-size: 13.5px; font-weight: 600; color: var(--accent); }
+.fs.hl { background: var(--accent-soft); border-color: transparent; }
+.persona { display: grid; grid-template-columns: 64px 1fr; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 20px; }
+.pa { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 24px; }
+.persona b { font-size: 18px; }
+.persona p { margin: 4px 0 12px; }
+.pp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14.5px; }
+.pp div { background: var(--bg); border-radius: 14px; padding: 12px; display: grid; gap: 4px; }
+.flowfig svg { display: block; width: 100%; height: auto; }
+.screens { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; padding: 8px 0 24px; }
+.screens figure { display: grid; gap: 10px; }
+.screens figcaption { font-size: 13.5px; color: var(--muted); }
+.screens figcaption b { display: block; color: var(--ink); font-size: 15px; }
+.ph { aspect-ratio: 9 / 18.5; background: #0E1116; border: 5px solid #232833; border-radius: 30px; padding: 16px 11px; display: flex; flex-direction: column; gap: 9px; color: #F2F4F7; font-size: 12px; overflow: hidden; }
+.ph .m { padding: 9px; gap: 7px; }
+.ph .m .t { font-size: 11.5px; }
+.ph .os div { font-size: 11.5px; padding: 4px 0; }
+.ph .slip { margin-top: auto; padding: 9px 10px; font-size: 12px; }
+.ph-top { display: flex; justify-content: space-between; align-items: center; }
+.ph-top b { font-size: 14px; }
+.ph .mono { font-size: 10.5px; color: #9AA3B2; }
+.bal { font-size: 11px; background: #222833; padding: 3px 8px; border-radius: 999px; }
+.tabs { display: flex; gap: 5px; overflow: hidden; }
+.tabs span { flex: none; font-size: 10.5px; padding: 4px 8px; border-radius: 999px; background: #171B22; color: #9AA3B2; }
+.tabs .on { background: #F2F4F7; color: #0E1116; font-weight: 600; }
+em.lv { font-style: normal; color: #FF3B30; }
+.os .lock { color: #5B6472; background: #171B22; }
+.os .d { box-shadow: inset 0 0 0 1.5px #FF5A5F; color: #FF5A5F; }
+.prog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.prog i { height: 4px; border-radius: 4px; background: #222833; }
+.prog i.on { background: #C6F432; }
+.pin { display: flex; justify-content: space-between; align-items: center; background: #171B22; border: 1px dashed #3A4250; border-radius: 10px; padding: 8px 10px; font-size: 11px; color: #9AA3B2; }
+.pin b { color: #C6F432; }
+.fl { display: grid; gap: 5px; font-size: 11px; color: #9AA3B2; margin-top: 6px; }
+.in { background: #171B22; border: 1.5px solid #C6F432; border-radius: 10px; padding: 10px; color: #F2F4F7; font-size: 13px; font-variant-numeric: tabular-nums; }
+.hint { font-size: 10.5px; color: #9AA3B2; }
+.hint.c { text-align: center; }
+.btn { background: #C6F432; color: #0E1116; border-radius: 12px; text-align: center; padding: 10px; font-weight: 700; font-size: 12.5px; }
+.btn.ghost { background: #222833; color: #F2F4F7; font-weight: 600; }
+.ph .btn:first-of-type { margin-top: auto; }
+.offer { background: linear-gradient(160deg, #222833, #171B22); border: 1px solid #2E3542; border-radius: 16px; padding: 14px; display: grid; gap: 6px; }
+.offer b { font-size: 20px; color: #C6F432; letter-spacing: -.02em; }
+.offer ul { list-style: none; display: grid; gap: 5px; font-size: 11.5px; color: #C9CFDA; }
+.offer li::before { content: '✓ '; color: #2ECC71; }
+.amt { font-size: 38px; font-weight: 700; letter-spacing: -.04em; text-align: center; margin: 10px 0 2px; font-variant-numeric: tabular-nums; }
+.chips2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.chips2 span { text-align: center; background: #171B22; border-radius: 9px; padding: 6px 0; font-size: 11px; font-weight: 600; }
+.chips2 .on { background: #F2F4F7; color: #0E1116; }
+.pay { display: grid; gap: 6px; margin-top: 6px; }
+.pay span { background: #171B22; border: 1px solid #2E3542; border-radius: 10px; padding: 9px 10px; font-size: 12px; font-weight: 600; }
+.pay span:first-child { border-color: #C6F432; }
+.ph.done { align-items: stretch; text-align: center; }
+.ok { width: 58px; height: 58px; border-radius: 50%; background: #C6F432; color: #0E1116; display: grid; place-items: center; font-size: 28px; font-weight: 800; margin: 26px auto 6px; }
+.big { font-size: 20px; letter-spacing: -.02em; }
+.states { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 14px; padding: 8px 0 24px; }
+.sc { background: #0E1116; border-radius: 22px; padding: 18px; display: grid; gap: 12px; align-content: start; }
+.sc .mono { color: #9AA3B2; }
+.big5 { grid-template-columns: repeat(5, 1fr) !important; }
+.big5 div { padding: 8px 0 !important; }
+.alerts { display: grid; gap: 8px; }
+.al { border-radius: 12px; padding: 10px 12px; background: #171B22; color: #C9CFDA; font-size: 12.5px; display: grid; gap: 2px; border-left: 3px solid #5B6472; }
+.al b { color: #F2F4F7; font-size: 13.5px; }
+.al.warn { border-left-color: #F5B946; } .al.bad { border-left-color: #FF5A5F; } .al.good { border-left-color: #2ECC71; }
+.ds { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+.sw { aspect-ratio: 1; border-radius: 16px; position: relative; border: 1px solid var(--line); }
+.sw span { position: absolute; left: 10px; bottom: 8px; font-family: var(--mono); font-size: 10.5px; color: #F2F4F7; }
+.sw.light span { color: #0E1116; }
+.web { background: #0E1116; display: grid; grid-template-columns: 180px 1fr 260px; gap: 12px; padding: 16px; color: #F2F4F7; }
+.wcol { background: #171B22; border-radius: 16px; padding: 14px; display: grid; gap: 10px; align-content: start; }
+.wcol b { font-size: 14px; }
+.wcol.s span { font-size: 13px; color: #9AA3B2; }
+.wcol .m { background: #222833; }
+.wcol .os div { background: #2E3542; }
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.metrics div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 3px; }
+.metrics span { color: var(--muted); font-size: 14px; }
+@media (max-width: 1000px) { .screens { grid-template-columns: repeat(3, 1fr); } .funnel { grid-template-columns: 1fr 1fr; } .states { grid-template-columns: 1fr; } .ds { grid-template-columns: repeat(4, 1fr); } .web { grid-template-columns: 1fr; } .web .wcol.s { display: none; } }
+@media (max-width: 560px) { .screens { grid-template-columns: 1fr 1fr; } .funnel, .pp, .metrics { grid-template-columns: 1fr; } .persona { grid-template-columns: 1fr; } }
+
+@media (max-width: 900px) {
+  .t-half, .t-third { grid-column: span 6; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .block { grid-template-columns: 1fr; gap: 14px; }
+  .xp .r { grid-template-columns: 1fr; gap: 2px; }
+  .nav-inner a.l.hide { display: none; }
+}
+@media (max-width: 560px) {
+  .decisions, .stat, .gallery { grid-template-columns: 1fr; }
+  .shot.wide { grid-column: span 1; aspect-ratio: 4 / 3; }
+  .a-gsg .l b { font-size: 44px; }
+  .ft-word { display: none; }
+  .nav-inner a.l { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav"><div class="nav-inner">
+  <a href="#home" aria-label="Home"><img src="data:image/png;base64,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" alt=""></a>
+  <a class="l" href="#home">Work</a>
+  <a class="l hide" href="#experience">Experience</a>
+  <a class="cta" href="#contact">Contact</a>
+</div></div>
+
+<!-- HOME -->
+<div class="view" id="v-home">
+<div class="wrap">
+  <section class="hero">
+    <span class="avail"><i></i>Open to UI/UX designer roles · Tbilisi</span>
+    <h1>Nino Pareshishvili</h1>
+    <p class="role">UI/UX Designer · <span>3+ years of experience</span></p>
+    <p class="lede2">Web and mobile products across insurance, healthcare supply and startups. I map multi-step journeys such as sign-up, purchase and payment, draw every state, and hand developers a design system they can build from.</p>
+    </section>
+
+  <div class="bento" id="work">
+    <a class="tile t-feature" href="#fulltime">
+      <div class="art a-ft">
+        <span class="badge">In progress · Concept</span>
+        <div class="phone">
+          <div class="h">Live now <em>● 3 LIVE</em></div>
+          <div class="m"><div class="t">Dinamo – Torpedo<small>63' · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div class="s"><small>X</small>3.40</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
+          <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
+          <div class="slip"><span>Bet slip · 1</span><span>3.40</span></div>
+        </div>
+        <div class="ft-word">Fulltime<small>Sportsbook app · mobile + web</small></div>
+      </div>
+      <div class="cap"><div><h3>Fulltime: from match to bet in under two minutes</h3><p>Sign-up, first deposit and bet slip designed as one flow.</p></div><span class="arrow" aria-hidden="true">→</span></div>
+    </a>
+
+    <a class="tile t-half" href="#gsg">
+      <div class="art"><img class="fill" src="img/gsg-cover.webp" alt="GSG case study cover: One Move Ahead"></div>
+      <div class="cap"><div><h3>GSG corporate website</h3><p>13 templates + design system · 2025</p></div><span class="arrow" aria-hidden="true">→</span></div>
+    </a>
+
+    <a class="tile t-half" href="#ctlab">
+      <div class="art a-shot"><img class="fill top" src="img/ct-dash.webp" alt="CT LAB dashboard with kit overview and site cards"></div>
+      <div class="cap"><div><h3>CT LAB</h3><p>Tracking medicine in clinical trials · Web app</p></div><span class="arrow" aria-hidden="true">→</span></div>
+    </a>
+
+    <div class="tile t-third t-info t-nda">
+      <span class="mono">Under NDA</span>
+      <h4>Insurance platform, 2024 to now</h4>
+      <p>Purchase and payment flows, product cards and the upcoming new website. Happy to walk through it in an interview.</p>
+    </div>
+    <div class="tile t-third t-info">
+      <span class="mono">How I work</span>
+      <h4>Flow first, then every state</h4>
+      <p>User flows and wireframes before UI. Loading, empty, error and declined states are drawn, never left to guesswork.</p>
+    </div>
+    <div class="tile t-third t-info">
+      <span class="mono">Toolkit</span>
+      <div class="chips"><span class="chip">Figma</span><span class="chip">Variables</span><span class="chip">Prototyping</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Jira</span><span class="chip ai">Claude</span><span class="chip ai">Claude Design</span></div>
+    </div>
+  </div>
+
+  <section class="sec" id="experience">
+    <div class="sec-h"><h2>Experience</h2><span class="mono">Georgian · English B2 · Russian B2</span></div>
+    <div class="xp">
+      <div class="r"><span class="mono">May 2024 – now</span><div><h4>UI/UX Designer · JSC Imedi L</h4><p>Redesigning the upcoming new website; mobile app, CRM and internal tools; purchase and payment flows; design system.</p></div></div>
+      <div class="r"><span class="mono">May 2023 – Jun 2024</span><div><h4>UI/UX Designer · Startup KidNest</h4><p>Responsive landing page and mobile app, from user flows to high-fidelity UI.</p></div></div>
+      <div class="r"><span class="mono">Feb 2022 – Jun 2024</span><div><h4>Graphic Designer · LTD Europroduct</h4><p>Campaign, social and print materials with the marketing team.</p></div></div>
+      <div class="r"><span class="mono">2021 – 2022</span><div><h4>Full-Stack Design · re:educate</h4><p>Plus Graphic Design at Academy of Digital Industries.</p></div></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <span class="mono" style="color:#A49DFF">Contact</span>
+    <h2>Have a flow people abandon? <span>Let's fix it.</span></h2>
+    <div class="links">
+      <a class="main" href="mailto:ninopareshishvili@gmail.com">ninopareshishvili@gmail.com</a>
+      <a href="tel:+995595555992">+995 595 555 992</a>
+      <a href="https://www.linkedin.com/in/nino-pareshishvili-02a99a195/">LinkedIn ↗</a>
+    </div>
+  </section>
+  <footer><span>© 2026 Nino Pareshishvili</span><span>Tbilisi, Georgia</span></footer>
+</div>
+</div>
+
+<!-- FULLTIME -->
+<div class="view" id="v-fulltime">
+<div class="wrap">
+  <div class="case-top">
+    <a class="back" href="#home">← All work</a>
+    <span class="mono">Sportsbook concept · Self-initiated · 2026</span>
+    <h1>Fulltime: from match to bet in under two minutes</h1>
+    <p class="lead">A mobile-first sportsbook concept built around the moment operators lose most new players: the gap between picking a bet and actually placing it.</p>
+  </div>
+
+  <div class="case-hero"><div class="art a-ft ft-hero">
+    <div class="phone">
+      <div class="h">Bet slip <em>SINGLE</em></div>
+      <div class="m"><div class="t">Dinamo – Torpedo · Draw<small>Odds changed 3.25 → 3.40</small></div><div class="os"><div><small>Stake</small>₾10</div><div class="s"><small>Odds</small>3.40</div><div><small>Win</small>₾34</div></div></div>
+      <div class="m"><div class="t">Accept new odds?<small>The price moved while you were signing up.</small></div></div>
+      <div class="slip"><span>Place bet</span><span>₾10</span></div>
+    </div>
+  </div></div>
+
+  <div class="facts">
+    <div><span class="mono">Role</span><b>UI/UX Designer (solo)</b></div>
+    <div><span class="mono">Platform</span><b>iOS / Android app + responsive web</b></div>
+    <div><span class="mono">Tools</span><b>Figma, FigJam, Claude</b></div>
+    <div><span class="mono">Status</span><b>Concept, in progress</b></div>
+  </div>
+
+  <nav class="toc" aria-label="Case study sections">
+    <a href="#ft-problem">Problem</a><a href="#ft-research">Research</a><a href="#ft-user">User</a><a href="#ft-flow">Flow</a><a href="#ft-decisions">Decisions</a><a href="#ft-screens">Screens</a><a href="#ft-states">States</a><a href="#ft-system">System</a><a href="#ft-measure">Measuring</a>
+  </nav>
+
+  <div class="block" id="ft-problem"><h3>The problem</h3><div class="body">
+    <p>New players rarely arrive to browse. They arrive for <strong>one match, often minutes before kick-off.</strong> Then they meet a long registration form, a request for ID documents, bonus terms in small print and a payment screen with one card option. By the time they are ready, the match has started, or they have left.</p>
+    <p>For an operator this is the most expensive leak in the product: every registration that never deposits is acquisition money already spent.</p>
+    <div class="stat">
+      <div><b>15–35%</b><span>of registered players make a first deposit in tier-1 markets</span></div>
+      <div><b>up to 10%</b><span>lost completion for each extra registration step</span></div>
+      <div><b>up to +22%</b><span>more first deposits with low or no wagering on the welcome offer</span></div>
+    </div>
+    <p class="src">Sources: <a href="https://blask.com/blog/from-ftd-to-active-player-how-to-improve-first-deposit-conversion-in-online-casino/">Blask / OptiKPI</a>, <a href="https://altenar.com/blog/how-to-build-an-effective-marketing-funnel-for-your-sportsbook/">Altenar</a>.</p>
+  </div></div>
+
+  <div class="block" id="ft-research"><h3>Where players drop off</h3><div class="body">
+    <p>I mapped the journey from first tap to placed bet and marked where industry research says players leave. Each friction point became a design question.</p>
+    <div class="funnel">
+      <div class="fs"><span class="mono">Stage 1</span><b>Registration</b><p>Long forms. Every optional field before the first deposit is a voluntary drop-off.</p><i>How few fields can we ask for?</i></div>
+      <div class="fs"><span class="mono">Stage 2</span><b>Verification</b><p>Document upload before the first deposit is one of the fastest ways to lose a registered player.</p><i>Can full KYC wait until withdrawal?</i></div>
+      <div class="fs"><span class="mono">Stage 3</span><b>Bonus</b><p>Wagering terms buried in fine print. Players who cannot read them in seconds don't deposit.</p><i>Can the offer fit on one card?</i></div>
+      <div class="fs"><span class="mono">Stage 4</span><b>Deposit</b><p>Card-only cashiers and extra steps. Fast, familiar methods lift first deposits.</p><i>Can it be one screen and two taps?</i></div>
+      <div class="fs hl"><span class="mono">Stage 5</span><b>First bet</b><p>The match the player came for is starting. If the selection is lost, so is the player.</p><i>Can the bet survive the whole journey?</i></div>
+    </div>
+  </div></div>
+
+  <div class="block" id="ft-user"><h3>Who it's for</h3><div class="body">
+    <div class="persona">
+      <div class="pa">G</div>
+      <div>
+        <b>Gio, 27 · proto-persona</b>
+        <p>Watches football with friends and bets from his phone, usually during the match. Wants to place one quick bet and check the result.</p>
+        <div class="pp"><div><span class="mono">Frustrated by</span>Long forms, unclear bonuses, odds that change without warning</div><div><span class="mono">Needs to trust</span>Visible balance, familiar payment, limits he controls</div></div>
+      </div>
+    </div>
+    <p class="note">A proto-persona built from assumptions and desk research, to be validated with real players.</p>
+  </div></div>
+
+  <div class="block" id="ft-flow"><h3>One flow, not three</h3><div class="body">
+    <p>Most sportsbooks treat sign-up, deposit and betting as separate products. In Fulltime they are one journey that starts with the bet. The selection is made first and stays in the slip until it is placed.</p>
+  </div></div>
+  <figure class="shot-img flowfig">
+  <svg viewBox="0 0 1100 470" role="img" aria-label="Fulltime user flow: the selected bet survives sign-up and deposit" font-family="Geist, Arial, sans-serif">
+    <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9AA3B2"/></marker></defs>
+    <rect width="1100" height="470" fill="#0E1116"/>
+    <g fill="none" stroke="#3A4250" stroke-width="1.5">
+      <path d="M200 90H250" marker-end="url(#fa)"/><path d="M420 90H470" marker-end="url(#fa)"/><path d="M640 90H700" marker-end="url(#fa)"/>
+      <path d="M790 130V190" marker-end="url(#fa)"/><path d="M880 90H1040V330H880" marker-end="url(#fa)"/>
+      <path d="M790 250V290" marker-end="url(#fa)"/><path d="M700 330H640" marker-end="url(#fa)"/>
+      <path d="M790 370V400" marker-end="url(#fa)"/><path d="M555 365V430H700" marker-end="url(#fa)"/>
+    </g>
+    <g font-size="15" fill="#F2F4F7" text-anchor="middle">
+      <rect x="40" y="62" width="160" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="120" y="95">Browse matches</text>
+      <rect x="250" y="62" width="170" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="335" y="95">Pick a selection</text>
+      <rect x="470" y="62" width="170" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="555" y="95">Bet slip + stake</text>
+      <polygon points="700,90 790,50 880,90 790,130" fill="#171B22" stroke="#2E3542"/><text x="790" y="95">Signed in?</text>
+      <rect x="700" y="190" width="180" height="60" rx="12" fill="#171B22" stroke="#2E3542"/><text x="790" y="216">Sign up</text><text x="790" y="236" font-size="12.5" fill="#9AA3B2">3 steps · ID check later</text>
+      <polygon points="700,330 790,290 880,330 790,370" fill="#171B22" stroke="#2E3542"/><text x="790" y="335">Balance ok?</text>
+      <rect x="470" y="300" width="170" height="64" rx="12" fill="#171B22" stroke="#2E3542"/><text x="555" y="327">First deposit</text><text x="555" y="347" font-size="12.5" fill="#9AA3B2">Apple / Google Pay</text>
+      <rect x="700" y="402" width="180" height="56" rx="12" fill="#C6F432"/><text x="790" y="436" fill="#0E1116" font-weight="700">Bet placed</text>
+    </g>
+    <g font-size="12.5" fill="#9AA3B2">
+      <text x="800" y="170">no</text><text x="1030" y="80" text-anchor="end">yes</text><text x="670" y="320" text-anchor="middle">no</text><text x="800" y="392">yes</text>
+      <text x="575" y="420" fill="#C6F432">selection kept</text>
+    </g>
+    <text x="40" y="440" font-size="13" fill="#5B6472">If odds move during the journey, the slip asks the player to accept the new price.</text>
+  </svg>
+  </figure>
+
+  <div class="block" id="ft-decisions"><h3>Key decisions</h3><div class="body"><div class="decisions">
+    <div><span class="n">01</span><b>Selection first, sign-up second</b><span>The chosen bet stays in the slip through registration and deposit, so the player never has to find the match again.</span></div>
+    <div><span class="n">02</span><b>Three-step sign-up</b><span>Phone, SMS code, then name, date of birth and password. Full ID check waits for the first withdrawal where the licence allows it.</span></div>
+    <div><span class="n">03</span><b>One-screen first deposit</b><span>Apple / Google Pay, a saved card and quick-amount chips. The stake from the slip is pre-filled.</span></div>
+    <div><span class="n">04</span><b>Bonus terms on one card</b><span>The offer, the wagering rule and the expiry in plain words, with “Continue without bonus” as an equal option.</span></div>
+    <div><span class="n">05</span><b>No silent odds changes</b><span>Odds that move flash up or down. In the slip, a changed price must be accepted before the bet goes through.</span></div>
+    <div><span class="n">06</span><b>Responsible gaming built in</b><span>Deposit limits sit on the deposit screen, not in settings. Confirm, edit and cancel have equal weight: no dark patterns.</span></div>
+  </div></div></div>
+
+  <div class="block" id="ft-screens"><h3>Key screens</h3><div class="body"><p>Five moments from the journey, in the order a new player meets them.</p></div></div>
+  <div class="screens">
+    <figure><div class="ph">
+      <div class="ph-top"><b>Fulltime</b><span class="bal">Sign in</span></div>
+      <div class="tabs"><span class="on">Live · 3</span><span>Today</span><span>Football</span><span>Basketball</span></div>
+      <div class="m"><div class="t">Dinamo – Torpedo<small><em class="lv">● 63'</em> · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div><small>X</small>3.25</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
+      <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div class="s"><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
+      <div class="m"><div class="t">Dila – Samgurali<small>Today 21:00</small></div><div class="os"><div><small>1</small>1.88</div><div><small>X</small>3.40</div><div class="lock"><small>2</small>🔒</div></div></div>
+      <div class="slip"><span>Bet slip · 1</span><span>3.25</span></div>
+    </div><figcaption><b>Matches</b>Live first. Odds that move show it; locked markets say so.</figcaption></figure>
+
+    <figure><div class="ph">
+      <div class="ph-top"><b>Create account</b><span class="mono">1 / 3</span></div>
+      <div class="prog"><i class="on"></i><i></i><i></i></div>
+      <div class="pin"><span>Your bet is saved</span><b>Draw · 3.25</b></div>
+      <label class="fl">Phone number<div class="in">+995 &nbsp;5__ ___ ___</div></label>
+      <p class="hint">We'll text you a code. No documents needed to start.</p>
+      <div class="btn">Send code</div>
+      <p class="hint c">Already have an account? <u>Sign in</u></p>
+    </div><figcaption><b>Sign up, step 1</b>The saved bet stays pinned at the top.</figcaption></figure>
+
+    <figure><div class="ph">
+      <div class="ph-top"><b>Welcome offer</b><span class="mono">optional</span></div>
+      <div class="offer"><span class="mono">First deposit</span><b>Free bet ₾10</b><ul><li>Deposit ₾10 or more</li><li>Free bet expires in 7 days</li><li>No wagering on winnings</li></ul></div>
+      <div class="btn">Take the offer</div>
+      <div class="btn ghost">Continue without bonus</div>
+    </div><figcaption><b>Bonus</b>The whole offer on one card, with an equal way out.</figcaption></figure>
+
+    <figure><div class="ph">
+      <div class="ph-top"><b>Deposit</b><span class="bal">₾0.00</span></div>
+      <div class="amt">₾10</div>
+      <div class="chips2"><span class="on">₾10</span><span>₾20</span><span>₾50</span><span>₾100</span></div>
+      <div class="pay"><span>Apple Pay</span><span>Google Pay</span><span>Card •• 4417</span></div>
+      <div class="btn">Deposit ₾10</div>
+      <p class="hint c"><u>Set a deposit limit</u></p>
+    </div><figcaption><b>First deposit</b>Stake pre-filled from the slip, two taps to pay.</figcaption></figure>
+
+    <figure><div class="ph done">
+      <div class="ok">✓</div>
+      <b class="big">Bet placed</b>
+      <p class="hint c">Saburtalo – Iberia · Draw @ 3.25</p>
+      <div class="m"><div class="os"><div><small>Stake</small>₾10</div><div><small>Odds</small>3.25</div><div class="s"><small>To win</small>₾32.50</div></div></div>
+      <div class="btn">Watch live</div>
+      <div class="btn ghost">My bets</div>
+    </div><figcaption><b>Done</b>The match the player came for, under two minutes later.</figcaption></figure>
+  </div>
+
+  <div class="block" id="ft-states"><h3>States & edge cases</h3><div class="body"><p>Every component has its states drawn, so nothing is left for development to guess.</p></div></div>
+  <div class="states">
+    <div class="sc"><span class="mono">Odds button</span><div class="os big5"><div><small>Default</small>2.05</div><div class="s"><small>Selected</small>2.05</div><div class="u"><small>Up</small>2.15 ▲</div><div class="d"><small>Down</small>1.95 ▼</div><div class="lock"><small>Suspended</small>🔒</div></div></div>
+    <div class="sc"><span class="mono">Bet slip</span><div class="alerts">
+      <div class="al warn"><b>Odds changed</b>3.25 → 3.40 · Accept to continue</div>
+      <div class="al bad"><b>Not enough balance</b>Add ₾6 to place this bet</div>
+      <div class="al bad"><b>Market closed</b>This selection is no longer available</div>
+    </div></div>
+    <div class="sc"><span class="mono">Payment</span><div class="alerts">
+      <div class="al"><b>Processing…</b>Don't close the app</div>
+      <div class="al bad"><b>Card declined</b>Try another method</div>
+      <div class="al good"><b>Deposit received</b>Your bet is ready</div>
+    </div></div>
+  </div>
+
+  <div class="block" id="ft-system"><h3>Design system</h3><div class="body"><p>A dark theme built on Figma variables: 12 colour tokens with status colours reserved for odds movement and alerts, a type scale with tabular numbers so odds don't jump when they change, and core components with every variant.</p></div></div>
+  <div class="ds">
+    <div class="sw" style="background:#0E1116"><span>bg/base</span></div>
+    <div class="sw" style="background:#171B22"><span>bg/surface</span></div>
+    <div class="sw" style="background:#222833"><span>bg/raised</span></div>
+    <div class="sw light" style="background:#C6F432"><span>accent</span></div>
+    <div class="sw" style="background:#2ECC71"><span>status/up</span></div>
+    <div class="sw" style="background:#FF5A5F"><span>status/down</span></div>
+    <div class="sw" style="background:#FF3B30"><span>status/live</span></div>
+    <div class="sw" style="background:#5B6472"><span>suspended</span></div>
+  </div>
+  <div class="chips" style="margin:14px 0 8px"><span class="chip">Odds button · 5 states</span><span class="chip">Match card</span><span class="chip">Bet slip · 6 states</span><span class="chip">Input</span><span class="chip">Amount chips</span><span class="chip">Button · 6 variants</span></div>
+
+  <div class="block"><h3>On desktop</h3><div class="body"><p>Three columns: sports on the left, matches in the middle and a sticky bet slip on the right, so the slip is always visible while the player browses.</p></div></div>
+  <figure class="shot-img"><div class="web">
+    <div class="wcol s"><b>Sports</b><span>Football</span><span>Basketball</span><span>Tennis</span><span>Esports</span></div>
+    <div class="wcol m2"><b>Live now</b>
+      <div class="m"><div class="t">Dinamo – Torpedo<small>63' · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div><small>X</small>3.25</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
+      <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div class="s"><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
+    </div>
+    <div class="wcol sl"><b>Bet slip</b><div class="m"><div class="t">Saburtalo – Iberia · Draw<small>Odds 3.25</small></div></div><div class="slip"><span>Place bet</span><span>₾10</span></div></div>
+  </div></figure>
+
+  <div class="block" id="ft-measure"><h3>How I'd measure it</h3><div class="body">
+    <p>A concept is a set of hypotheses. In a live product I would track four numbers before and after, and A/B test the sign-up and deposit steps.</p>
+    <div class="metrics"><div><b>Registration completion</b><span>Does a 3-step form finish more often?</span></div><div><b>Registration → first deposit</b><span>Does deferring ID checks close the gap?</span></div><div><b>Time to first bet</b><span>Can a new player bet before kick-off?</span></div><div><b>Bet slip abandonment</b><span>Do visible odds changes reduce drop-off?</span></div></div>
+  </div></div>
+
+  <a class="next" href="#gsg"><div><span class="mono">Next project</span><br><b>GSG corporate website</b></div><span class="arrow" aria-hidden="true">→</span></a>
+</div>
+</div>
+
+<!-- GSG -->
+<div class="view" id="v-gsg">
+<div class="wrap">
+  <div class="case-top">
+    <a class="back" href="#home">← All work</a>
+    <span class="mono">Corporate website · Design system · 2025</span>
+    <h1>GSG: one move ahead</h1>
+    <p class="lead">A corporate website and reusable design system for GSG, a technology-enabled BPO and IT partner in Tbilisi serving global brands in customer experience, business process management and software engineering.</p>
+  </div>
+  <figure class="case-hero"><img src="img/gsg-cover.webp" alt="GSG case study cover"></figure>
+  <div class="facts">
+    <div><span class="mono">Role</span><b>UX/UI Designer: research, IA, visual design, design system, handoff</b></div>
+    <div><span class="mono">Scope</span><b>Marketing website, desktop + mobile</b></div>
+    <div><span class="mono">Tools</span><b>Figma, FigJam, Figma Prototyping</b></div>
+    <div><span class="mono">Deliverables</span><b>13 templates, component library, dev handoff</b></div>
+  </div>
+  <div class="stat" style="margin-top:12px">
+    <div><b>13</b><span>page templates designed</span></div>
+    <div><b>1440 / 375</b><span>breakpoints, each drawn as its own layout</span></div>
+    <div><b>16</b><span>shared components in the library</span></div>
+  </div>
+
+  <div class="block"><h3>The challenge</h3><div class="body">
+    <p>The company had outgrown its old site: an outdated, text-heavy page that read like a local vendor rather than an international outsourcing partner. An audit against how the business actually sells surfaced four gaps, and each became a design decision.</p>
+    <div class="decisions">
+      <div><span class="n">01</span><b>Read like a local vendor</b><span>Repositioned around one promise, “One Move Ahead”, with an Impact in Numbers band above the fold.</span></div>
+      <div><span class="n">02</span><b>Three services in one flat list</b><span>CX, BPM and IT became colour-coded verticals, each with its own card, entry point and detail template.</span></div>
+      <div><span class="n">03</span><b>Hiring with no funnel</b><span>Careers became a first-class section with an inline application, plus an “Our Space” culture page.</span></div>
+      <div><span class="n">04</span><b>Every page hand-built</b><span>A component library with type ramp, colour tokens, cards, navigation and footer, shipped as a documented handoff page.</span></div>
+    </div>
+  </div></div>
+
+  <div class="block"><h3>Information architecture</h3><div class="body"><p>Thirteen templates, six top-level destinations. Every service vertical resolves in one click; legal and error states were specified up front. Two primary flows: sales (to “Leave a request”) and recruiting (to “Apply”).</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-ia.webp" alt="GSG sitemap and primary flows" loading="lazy"></figure>
+
+  <div class="block"><h3>Design system</h3><div class="body"><p>The tokens came first and every page was assembled from them. Violet, lime and cream mark the three verticals on a near-black surface; Quinn Bold for display, Aloevera Display for UI and body; a 12-column desktop grid and 4-column mobile grid.</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-ds.webp" alt="GSG colours, type scale, grid and component list" loading="lazy"></figure>
+
+  <div class="block"><h3>Homepage</h3><div class="body"><p>The whole proposition in one scroll: who GSG is, the numbers that prove it, the three things they sell, and two live content streams that keep the page from going stale.</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-home.webp" alt="GSG homepage in a browser mockup with annotations" loading="lazy"></figure>
+
+  <div class="block"><h3>Colour as wayfinding</h3><div class="body"><p>Each vertical has a colour and a folder-tab card. That colour follows the visitor into the detail page, the navigation state and the request form, so a returning visitor knows at a glance they are in the right place.</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-services.webp" alt="CX, BPM and IT folder-tab cards and the services page" loading="lazy"></figure>
+
+  <div class="block"><h3>Content that keeps working</h3><div class="body"><p>News and careers run without a designer: one card component holds every article, and a job listing becomes an application in two screens, with no third-party board.</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-news.webp" alt="GSG news and careers pages, desktop and mobile" loading="lazy"></figure>
+
+  <div class="block"><h3>Designed twice, not squeezed</h3><div class="body"><p>Every template was drawn at 375 px as its own layout. The proof band moves above the service cards, the folder cards stack, and the desktop CTA rail becomes a fixed bottom bar.</p></div></div>
+  <figure class="shot-img"><img src="img/gsg-mobile.webp" alt="Five GSG mobile screens" loading="lazy"></figure>
+
+  <div class="block"><h3>What shipped</h3><div class="body">
+    <p><strong>Thirteen templates, ready to build,</strong> desktop and mobile, on a handoff page with each template marked done, in review or pending. <strong>A library, not a mockup:</strong> new pages are assembled from stock. <strong>A structure the client can run:</strong> the team publishes news and roles without touching layout.</p>
+  </div></div>
+  <a class="next" href="#ctlab"><div><span class="mono">Next project</span><br><b>CT LAB</b></div><span class="arrow" aria-hidden="true">→</span></a>
+</div>
+</div>
+
+<!-- CT LAB -->
+<div class="view" id="v-ctlab">
+<div class="wrap">
+  <div class="case-top">
+    <a class="back" href="#home">← All work</a>
+    <span class="mono">Web app · Design challenge</span>
+    <h1>CT LAB: tracking medicine in clinical trials</h1>
+    <p class="lead">A platform for clinical research associates to follow trial kits from warehouse to hospital site: what is ready, in transit, expiring or below safety stock, and what to order or reconcile next.</p>
+  </div>
+  <figure class="case-hero light"><img src="img/ct-dash.webp" alt="CT LAB dashboard"></figure>
+  <div class="facts">
+    <div><span class="mono">Role</span><b>UI/UX Designer</b></div>
+    <div><span class="mono">Context</span><b>EPAM design challenge</b></div>
+    <div><span class="mono">Tools</span><b>Figma</b></div>
+    <div><span class="mono">Deliverables</span><b>UI kit + 7 product areas</b></div>
+  </div>
+
+  <div class="block"><h3>Overview</h3><div class="body">
+    <p>Clinical trials depend on the right medication reaching the right site before it expires. The design gives a study coordinator one place to see stock health across sites and act on it: order, reconcile or check a kit.</p>
+    <p>This was a design challenge for EPAM, so it is a concept: there was no access to trial staff for research.</p>
+  </div></div>
+
+  <div class="block"><h3>Dashboard</h3><div class="body"><p>Five numbers answer “is anything wrong?” first: ready, in transit, expiring soon, expired and below safety stock. Below them, each site card shows its status chip, stock split and safety-stock bar, with View kits, Order and Reconcile as direct actions.</p></div></div>
+
+  <div class="block"><h3>Warehouse</h3><div class="body"><p>Tabs split 150 kits by state (available, pre-expiry, expired, waste), and status chips use the same colours as the dashboard. Reconciliation starts from one primary button.</p></div></div>
+  <figure class="shot-img light"><img src="img/ct-warehouse.webp" alt="CT LAB warehouse table with status tabs" loading="lazy"></figure>
+
+  <div class="block"><h3>Orders</h3><div class="body"><p>Filter by site, delivery date, status, location, requester or supplier. In transit, pending, cancelled and delivered each get their own chip so a long table can be scanned by colour.</p></div></div>
+  <figure class="shot-img light"><img src="img/ct-orders.webp" alt="CT LAB orders table with filters" loading="lazy"></figure>
+
+  <div class="gallery">
+    <figure class="shot-img light"><img src="img/ct-map.webp" alt="CT LAB map of warehouses and sites with stock status" loading="lazy"><figcaption>Map: stock and shipments between warehouses and sites</figcaption></figure>
+    <figure class="shot-img light"><img src="img/ct-kit.webp" alt="CT LAB kit detail cards" loading="lazy"><figcaption>Kit: dosage, quantity and expiry with order and reconcile actions</figcaption></figure>
+  </div>
+  <a class="next" href="#fulltime"><div><span class="mono">Next project</span><br><b>Fulltime</b></div><span class="arrow" aria-hidden="true">→</span></a>
+</div>
+</div>
+
+<script>
+(function(){
+  var views = { 'ft-problem':'v-fulltime','ft-research':'v-fulltime','ft-user':'v-fulltime','ft-flow':'v-fulltime','ft-decisions':'v-fulltime','ft-screens':'v-fulltime','ft-states':'v-fulltime','ft-system':'v-fulltime','ft-measure':'v-fulltime', home:'v-home', work:'v-home', experience:'v-home', contact:'v-home', fulltime:'v-fulltime', gsg:'v-gsg', ctlab:'v-ctlab' };
+  var last = null;
+  function route(){
+    var h = (location.hash || '#home').slice(1);
+    var id = views[h] || 'v-home';
+    if (id !== last) {
+      document.querySelectorAll('.view').forEach(function(v){ v.classList.toggle('on', v.id === id); });
+      last = id;
+      if (id !== 'v-home' || h === 'home') window.scrollTo(0, 0);
+    }
+    if (h !== 'home' && !(h in {fulltime:1,gsg:1,ctlab:1})) { var el = document.getElementById(h); if (el) el.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
