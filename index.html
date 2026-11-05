@@ -328,19 +328,7 @@ em.lv { font-style: normal; color: #FF3B30; }
     </section>
 
   <div class="bento" id="work">
-    <a class="tile t-feature" href="#fulltime">
-      <div class="art a-ft">
-        <span class="badge">In progress · Concept</span>
-        <div class="phone">
-          <div class="h">Live now <em>● 3 LIVE</em></div>
-          <div class="m"><div class="t">Dinamo – Torpedo<small>63' · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div class="s"><small>X</small>3.40</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
-          <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
-          <div class="slip"><span>Bet slip · 1</span><span>3.40</span></div>
-        </div>
-        <div class="ft-word">Fulltime<small>Sportsbook app · mobile + web</small></div>
-      </div>
-      <div class="cap"><div><h3>Fulltime: from match to bet in under two minutes</h3><p>Sign-up, first deposit and bet slip designed as one flow.</p></div><span class="arrow" aria-hidden="true">→</span></div>
-    </a>
+    
 
     <a class="tile t-half" href="#gsg">
       <div class="art"><img class="fill" src="img/gsg-cover.webp" alt="GSG case study cover: One Move Ahead"></div>
@@ -388,204 +376,6 @@ em.lv { font-style: normal; color: #FF3B30; }
     </div>
   </section>
   <footer><span>© 2026 Nino Pareshishvili</span><span>Tbilisi, Georgia</span></footer>
-</div>
-</div>
-
-<!-- FULLTIME -->
-<div class="view" id="v-fulltime">
-<div class="wrap">
-  <div class="case-top">
-    <a class="back" href="#home">← All work</a>
-    <span class="mono">Sportsbook concept · Self-initiated · 2026</span>
-    <h1>Fulltime: from match to bet in under two minutes</h1>
-    <p class="lead">A mobile-first sportsbook concept built around the moment operators lose most new players: the gap between picking a bet and actually placing it.</p>
-  </div>
-
-  <div class="case-hero"><div class="art a-ft ft-hero">
-    <div class="phone">
-      <div class="h">Bet slip <em>SINGLE</em></div>
-      <div class="m"><div class="t">Dinamo – Torpedo · Draw<small>Odds changed 3.25 → 3.40</small></div><div class="os"><div><small>Stake</small>₾10</div><div class="s"><small>Odds</small>3.40</div><div><small>Win</small>₾34</div></div></div>
-      <div class="m"><div class="t">Accept new odds?<small>The price moved while you were signing up.</small></div></div>
-      <div class="slip"><span>Place bet</span><span>₾10</span></div>
-    </div>
-  </div></div>
-
-  <div class="facts">
-    <div><span class="mono">Role</span><b>UI/UX Designer (solo)</b></div>
-    <div><span class="mono">Platform</span><b>iOS / Android app + responsive web</b></div>
-    <div><span class="mono">Tools</span><b>Figma, FigJam, Claude</b></div>
-    <div><span class="mono">Status</span><b>Concept, in progress</b></div>
-  </div>
-
-  <nav class="toc" aria-label="Case study sections">
-    <a href="#ft-problem">Problem</a><a href="#ft-research">Research</a><a href="#ft-user">User</a><a href="#ft-flow">Flow</a><a href="#ft-decisions">Decisions</a><a href="#ft-screens">Screens</a><a href="#ft-states">States</a><a href="#ft-system">System</a><a href="#ft-measure">Measuring</a>
-  </nav>
-
-  <div class="block" id="ft-problem"><h3>The problem</h3><div class="body">
-    <p>New players rarely arrive to browse. They arrive for <strong>one match, often minutes before kick-off.</strong> Then they meet a long registration form, a request for ID documents, bonus terms in small print and a payment screen with one card option. By the time they are ready, the match has started, or they have left.</p>
-    <p>For an operator this is the most expensive leak in the product: every registration that never deposits is acquisition money already spent.</p>
-    <div class="stat">
-      <div><b>15–35%</b><span>of registered players make a first deposit in tier-1 markets</span></div>
-      <div><b>up to 10%</b><span>lost completion for each extra registration step</span></div>
-      <div><b>up to +22%</b><span>more first deposits with low or no wagering on the welcome offer</span></div>
-    </div>
-    <p class="src">Sources: <a href="https://blask.com/blog/from-ftd-to-active-player-how-to-improve-first-deposit-conversion-in-online-casino/">Blask / OptiKPI</a>, <a href="https://altenar.com/blog/how-to-build-an-effective-marketing-funnel-for-your-sportsbook/">Altenar</a>.</p>
-  </div></div>
-
-  <div class="block" id="ft-research"><h3>Where players drop off</h3><div class="body">
-    <p>I mapped the journey from first tap to placed bet and marked where industry research says players leave. Each friction point became a design question.</p>
-    <div class="funnel">
-      <div class="fs"><span class="mono">Stage 1</span><b>Registration</b><p>Long forms. Every optional field before the first deposit is a voluntary drop-off.</p><i>How few fields can we ask for?</i></div>
-      <div class="fs"><span class="mono">Stage 2</span><b>Verification</b><p>Document upload before the first deposit is one of the fastest ways to lose a registered player.</p><i>Can full KYC wait until withdrawal?</i></div>
-      <div class="fs"><span class="mono">Stage 3</span><b>Bonus</b><p>Wagering terms buried in fine print. Players who cannot read them in seconds don't deposit.</p><i>Can the offer fit on one card?</i></div>
-      <div class="fs"><span class="mono">Stage 4</span><b>Deposit</b><p>Card-only cashiers and extra steps. Fast, familiar methods lift first deposits.</p><i>Can it be one screen and two taps?</i></div>
-      <div class="fs hl"><span class="mono">Stage 5</span><b>First bet</b><p>The match the player came for is starting. If the selection is lost, so is the player.</p><i>Can the bet survive the whole journey?</i></div>
-    </div>
-  </div></div>
-
-  <div class="block" id="ft-user"><h3>Who it's for</h3><div class="body">
-    <div class="persona">
-      <div class="pa">G</div>
-      <div>
-        <b>Gio, 27 · proto-persona</b>
-        <p>Watches football with friends and bets from his phone, usually during the match. Wants to place one quick bet and check the result.</p>
-        <div class="pp"><div><span class="mono">Frustrated by</span>Long forms, unclear bonuses, odds that change without warning</div><div><span class="mono">Needs to trust</span>Visible balance, familiar payment, limits he controls</div></div>
-      </div>
-    </div>
-    <p class="note">A proto-persona built from assumptions and desk research, to be validated with real players.</p>
-  </div></div>
-
-  <div class="block" id="ft-flow"><h3>One flow, not three</h3><div class="body">
-    <p>Most sportsbooks treat sign-up, deposit and betting as separate products. In Fulltime they are one journey that starts with the bet. The selection is made first and stays in the slip until it is placed.</p>
-  </div></div>
-  <figure class="shot-img flowfig">
-  <svg viewBox="0 0 1100 470" role="img" aria-label="Fulltime user flow: the selected bet survives sign-up and deposit" font-family="Geist, Arial, sans-serif">
-    <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9AA3B2"/></marker></defs>
-    <rect width="1100" height="470" fill="#0E1116"/>
-    <g fill="none" stroke="#3A4250" stroke-width="1.5">
-      <path d="M200 90H250" marker-end="url(#fa)"/><path d="M420 90H470" marker-end="url(#fa)"/><path d="M640 90H700" marker-end="url(#fa)"/>
-      <path d="M790 130V190" marker-end="url(#fa)"/><path d="M880 90H1040V330H880" marker-end="url(#fa)"/>
-      <path d="M790 250V290" marker-end="url(#fa)"/><path d="M700 330H640" marker-end="url(#fa)"/>
-      <path d="M790 370V400" marker-end="url(#fa)"/><path d="M555 365V430H700" marker-end="url(#fa)"/>
-    </g>
-    <g font-size="15" fill="#F2F4F7" text-anchor="middle">
-      <rect x="40" y="62" width="160" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="120" y="95">Browse matches</text>
-      <rect x="250" y="62" width="170" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="335" y="95">Pick a selection</text>
-      <rect x="470" y="62" width="170" height="56" rx="12" fill="#171B22" stroke="#2E3542"/><text x="555" y="95">Bet slip + stake</text>
-      <polygon points="700,90 790,50 880,90 790,130" fill="#171B22" stroke="#2E3542"/><text x="790" y="95">Signed in?</text>
-      <rect x="700" y="190" width="180" height="60" rx="12" fill="#171B22" stroke="#2E3542"/><text x="790" y="216">Sign up</text><text x="790" y="236" font-size="12.5" fill="#9AA3B2">3 steps · ID check later</text>
-      <polygon points="700,330 790,290 880,330 790,370" fill="#171B22" stroke="#2E3542"/><text x="790" y="335">Balance ok?</text>
-      <rect x="470" y="300" width="170" height="64" rx="12" fill="#171B22" stroke="#2E3542"/><text x="555" y="327">First deposit</text><text x="555" y="347" font-size="12.5" fill="#9AA3B2">Apple / Google Pay</text>
-      <rect x="700" y="402" width="180" height="56" rx="12" fill="#C6F432"/><text x="790" y="436" fill="#0E1116" font-weight="700">Bet placed</text>
-    </g>
-    <g font-size="12.5" fill="#9AA3B2">
-      <text x="800" y="170">no</text><text x="1030" y="80" text-anchor="end">yes</text><text x="670" y="320" text-anchor="middle">no</text><text x="800" y="392">yes</text>
-      <text x="575" y="420" fill="#C6F432">selection kept</text>
-    </g>
-    <text x="40" y="440" font-size="13" fill="#5B6472">If odds move during the journey, the slip asks the player to accept the new price.</text>
-  </svg>
-  </figure>
-
-  <div class="block" id="ft-decisions"><h3>Key decisions</h3><div class="body"><div class="decisions">
-    <div><span class="n">01</span><b>Selection first, sign-up second</b><span>The chosen bet stays in the slip through registration and deposit, so the player never has to find the match again.</span></div>
-    <div><span class="n">02</span><b>Three-step sign-up</b><span>Phone, SMS code, then name, date of birth and password. Full ID check waits for the first withdrawal where the licence allows it.</span></div>
-    <div><span class="n">03</span><b>One-screen first deposit</b><span>Apple / Google Pay, a saved card and quick-amount chips. The stake from the slip is pre-filled.</span></div>
-    <div><span class="n">04</span><b>Bonus terms on one card</b><span>The offer, the wagering rule and the expiry in plain words, with “Continue without bonus” as an equal option.</span></div>
-    <div><span class="n">05</span><b>No silent odds changes</b><span>Odds that move flash up or down. In the slip, a changed price must be accepted before the bet goes through.</span></div>
-    <div><span class="n">06</span><b>Responsible gaming built in</b><span>Deposit limits sit on the deposit screen, not in settings. Confirm, edit and cancel have equal weight: no dark patterns.</span></div>
-  </div></div></div>
-
-  <div class="block" id="ft-screens"><h3>Key screens</h3><div class="body"><p>Five moments from the journey, in the order a new player meets them.</p></div></div>
-  <div class="screens">
-    <figure><div class="ph">
-      <div class="ph-top"><b>Fulltime</b><span class="bal">Sign in</span></div>
-      <div class="tabs"><span class="on">Live · 3</span><span>Today</span><span>Football</span><span>Basketball</span></div>
-      <div class="m"><div class="t">Dinamo – Torpedo<small><em class="lv">● 63'</em> · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div><small>X</small>3.25</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
-      <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div class="s"><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
-      <div class="m"><div class="t">Dila – Samgurali<small>Today 21:00</small></div><div class="os"><div><small>1</small>1.88</div><div><small>X</small>3.40</div><div class="lock"><small>2</small>🔒</div></div></div>
-      <div class="slip"><span>Bet slip · 1</span><span>3.25</span></div>
-    </div><figcaption><b>Matches</b>Live first. Odds that move show it; locked markets say so.</figcaption></figure>
-
-    <figure><div class="ph">
-      <div class="ph-top"><b>Create account</b><span class="mono">1 / 3</span></div>
-      <div class="prog"><i class="on"></i><i></i><i></i></div>
-      <div class="pin"><span>Your bet is saved</span><b>Draw · 3.25</b></div>
-      <label class="fl">Phone number<div class="in">+995 &nbsp;5__ ___ ___</div></label>
-      <p class="hint">We'll text you a code. No documents needed to start.</p>
-      <div class="btn">Send code</div>
-      <p class="hint c">Already have an account? <u>Sign in</u></p>
-    </div><figcaption><b>Sign up, step 1</b>The saved bet stays pinned at the top.</figcaption></figure>
-
-    <figure><div class="ph">
-      <div class="ph-top"><b>Welcome offer</b><span class="mono">optional</span></div>
-      <div class="offer"><span class="mono">First deposit</span><b>Free bet ₾10</b><ul><li>Deposit ₾10 or more</li><li>Free bet expires in 7 days</li><li>No wagering on winnings</li></ul></div>
-      <div class="btn">Take the offer</div>
-      <div class="btn ghost">Continue without bonus</div>
-    </div><figcaption><b>Bonus</b>The whole offer on one card, with an equal way out.</figcaption></figure>
-
-    <figure><div class="ph">
-      <div class="ph-top"><b>Deposit</b><span class="bal">₾0.00</span></div>
-      <div class="amt">₾10</div>
-      <div class="chips2"><span class="on">₾10</span><span>₾20</span><span>₾50</span><span>₾100</span></div>
-      <div class="pay"><span>Apple Pay</span><span>Google Pay</span><span>Card •• 4417</span></div>
-      <div class="btn">Deposit ₾10</div>
-      <p class="hint c"><u>Set a deposit limit</u></p>
-    </div><figcaption><b>First deposit</b>Stake pre-filled from the slip, two taps to pay.</figcaption></figure>
-
-    <figure><div class="ph done">
-      <div class="ok">✓</div>
-      <b class="big">Bet placed</b>
-      <p class="hint c">Saburtalo – Iberia · Draw @ 3.25</p>
-      <div class="m"><div class="os"><div><small>Stake</small>₾10</div><div><small>Odds</small>3.25</div><div class="s"><small>To win</small>₾32.50</div></div></div>
-      <div class="btn">Watch live</div>
-      <div class="btn ghost">My bets</div>
-    </div><figcaption><b>Done</b>The match the player came for, under two minutes later.</figcaption></figure>
-  </div>
-
-  <div class="block" id="ft-states"><h3>States & edge cases</h3><div class="body"><p>Every component has its states drawn, so nothing is left for development to guess.</p></div></div>
-  <div class="states">
-    <div class="sc"><span class="mono">Odds button</span><div class="os big5"><div><small>Default</small>2.05</div><div class="s"><small>Selected</small>2.05</div><div class="u"><small>Up</small>2.15 ▲</div><div class="d"><small>Down</small>1.95 ▼</div><div class="lock"><small>Suspended</small>🔒</div></div></div>
-    <div class="sc"><span class="mono">Bet slip</span><div class="alerts">
-      <div class="al warn"><b>Odds changed</b>3.25 → 3.40 · Accept to continue</div>
-      <div class="al bad"><b>Not enough balance</b>Add ₾6 to place this bet</div>
-      <div class="al bad"><b>Market closed</b>This selection is no longer available</div>
-    </div></div>
-    <div class="sc"><span class="mono">Payment</span><div class="alerts">
-      <div class="al"><b>Processing…</b>Don't close the app</div>
-      <div class="al bad"><b>Card declined</b>Try another method</div>
-      <div class="al good"><b>Deposit received</b>Your bet is ready</div>
-    </div></div>
-  </div>
-
-  <div class="block" id="ft-system"><h3>Design system</h3><div class="body"><p>A dark theme built on Figma variables: 12 colour tokens with status colours reserved for odds movement and alerts, a type scale with tabular numbers so odds don't jump when they change, and core components with every variant.</p></div></div>
-  <div class="ds">
-    <div class="sw" style="background:#0E1116"><span>bg/base</span></div>
-    <div class="sw" style="background:#171B22"><span>bg/surface</span></div>
-    <div class="sw" style="background:#222833"><span>bg/raised</span></div>
-    <div class="sw light" style="background:#C6F432"><span>accent</span></div>
-    <div class="sw" style="background:#2ECC71"><span>status/up</span></div>
-    <div class="sw" style="background:#FF5A5F"><span>status/down</span></div>
-    <div class="sw" style="background:#FF3B30"><span>status/live</span></div>
-    <div class="sw" style="background:#5B6472"><span>suspended</span></div>
-  </div>
-  <div class="chips" style="margin:14px 0 8px"><span class="chip">Odds button · 5 states</span><span class="chip">Match card</span><span class="chip">Bet slip · 6 states</span><span class="chip">Input</span><span class="chip">Amount chips</span><span class="chip">Button · 6 variants</span></div>
-
-  <div class="block"><h3>On desktop</h3><div class="body"><p>Three columns: sports on the left, matches in the middle and a sticky bet slip on the right, so the slip is always visible while the player browses.</p></div></div>
-  <figure class="shot-img"><div class="web">
-    <div class="wcol s"><b>Sports</b><span>Football</span><span>Basketball</span><span>Tennis</span><span>Esports</span></div>
-    <div class="wcol m2"><b>Live now</b>
-      <div class="m"><div class="t">Dinamo – Torpedo<small>63' · 1 : 0</small></div><div class="os"><div><small>1</small>1.42</div><div><small>X</small>3.25</div><div class="u"><small>2</small>6.10 ▲</div></div></div>
-      <div class="m"><div class="t">Saburtalo – Iberia<small>Today 19:00</small></div><div class="os"><div><small>1</small>2.05</div><div class="s"><small>X</small>3.25</div><div><small>2</small>3.30</div></div></div>
-    </div>
-    <div class="wcol sl"><b>Bet slip</b><div class="m"><div class="t">Saburtalo – Iberia · Draw<small>Odds 3.25</small></div></div><div class="slip"><span>Place bet</span><span>₾10</span></div></div>
-  </div></figure>
-
-  <div class="block" id="ft-measure"><h3>How I'd measure it</h3><div class="body">
-    <p>A concept is a set of hypotheses. In a live product I would track four numbers before and after, and A/B test the sign-up and deposit steps.</p>
-    <div class="metrics"><div><b>Registration completion</b><span>Does a 3-step form finish more often?</span></div><div><b>Registration → first deposit</b><span>Does deferring ID checks close the gap?</span></div><div><b>Time to first bet</b><span>Can a new player bet before kick-off?</span></div><div><b>Bet slip abandonment</b><span>Do visible odds changes reduce drop-off?</span></div></div>
-  </div></div>
-
-  <a class="next" href="#gsg"><div><span class="mono">Next project</span><br><b>GSG corporate website</b></div><span class="arrow" aria-hidden="true">→</span></a>
 </div>
 </div>
 
@@ -680,13 +470,13 @@ em.lv { font-style: normal; color: #FF3B30; }
     <figure class="shot-img light"><img src="img/ct-map.webp" alt="CT LAB map of warehouses and sites with stock status" loading="lazy"><figcaption>Map: stock and shipments between warehouses and sites</figcaption></figure>
     <figure class="shot-img light"><img src="img/ct-kit.webp" alt="CT LAB kit detail cards" loading="lazy"><figcaption>Kit: dosage, quantity and expiry with order and reconcile actions</figcaption></figure>
   </div>
-  <a class="next" href="#fulltime"><div><span class="mono">Next project</span><br><b>Fulltime</b></div><span class="arrow" aria-hidden="true">→</span></a>
+  <a class="next" href="#gsg"><div><span class="mono">Next project</span><br><b>GSG corporate website</b></div><span class="arrow" aria-hidden="true">→</span></a>
 </div>
 </div>
 
 <script>
 (function(){
-  var views = { 'ft-problem':'v-fulltime','ft-research':'v-fulltime','ft-user':'v-fulltime','ft-flow':'v-fulltime','ft-decisions':'v-fulltime','ft-screens':'v-fulltime','ft-states':'v-fulltime','ft-system':'v-fulltime','ft-measure':'v-fulltime', home:'v-home', work:'v-home', experience:'v-home', contact:'v-home', fulltime:'v-fulltime', gsg:'v-gsg', ctlab:'v-ctlab' };
+  var views = {  home:'v-home', work:'v-home', experience:'v-home', contact:'v-home', gsg:'v-gsg', ctlab:'v-ctlab' };
   var last = null;
   function route(){
     var h = (location.hash || '#home').slice(1);
@@ -696,7 +486,7 @@ em.lv { font-style: normal; color: #FF3B30; }
       last = id;
       if (id !== 'v-home' || h === 'home') window.scrollTo(0, 0);
     }
-    if (h !== 'home' && !(h in {fulltime:1,gsg:1,ctlab:1})) { var el = document.getElementById(h); if (el) el.scrollIntoView(); }
+    if (h !== 'home' && !(h in {gsg:1,ctlab:1})) { var el = document.getElementById(h); if (el) el.scrollIntoView(); }
   }
   window.addEventListener('hashchange', route);
   route();
