@@ -306,6 +306,13 @@ em.lv { font-style: normal; color: #FF3B30; }
   .ft-word { display: none; }
   .nav-inner a.l { padding: 8px 10px; }
 }
+.live { display: inline-flex; align-items: center; gap: 10px; width: fit-content; margin-top: 6px; padding: 12px 20px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; font-size: 15px; }
+.live:hover { filter: brightness(1.08); }
+.live i { width: 8px; height: 8px; border-radius: 50%; background: #3DDC84; box-shadow: 0 0 0 4px rgba(61,220,132,.25); }
+.shot-img.soft { background: #EEF1F7; }
+.tile .badge { position: absolute; bottom: 18px; left: 18px; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: #fff; color: #0E1116; font: 600 12.5px/1 inherit; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+.tile .badge i { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; }
+.t-feature .art { position: relative; }
 </style>
 </head>
 <body>
@@ -328,6 +335,10 @@ em.lv { font-style: normal; color: #FF3B30; }
     </section>
 
   <div class="bento" id="work">
+    <a class="tile t-feature" href="#uno">
+      <div class="art"><span class="badge"><i></i>Shipped · live</span><img class="fill top" src="img/uno-cover.webp" alt="UNO Select product page on imedil.ge"></div>
+      <div class="cap"><div><h3>UNO Select: health insurance, bought online</h3><p>Insurance · Imedi L · Product page and 4-step purchase flow · Live on imedil.ge</p></div><span class="arrow" aria-hidden="true">→</span></div>
+    </a>
     
 
     <a class="tile t-feature" href="#openfinance">
@@ -350,8 +361,8 @@ em.lv { font-style: normal; color: #FF3B30; }
 
     <div class="tile t-third t-info t-nda">
       <span class="mono">Under NDA</span>
-      <h4>Insurance platform, 2024 to now</h4>
-      <p>Purchase and payment flows, product cards and the upcoming new website. Happy to walk through it in an interview.</p>
+      <h4>More Imedi L work, 2024 to now</h4>
+      <p>Mobile app, CRM, internal tools and the upcoming new website. Happy to walk through it in an interview.</p>
     </div>
     <div class="tile t-third t-info">
       <span class="mono">How I work</span>
@@ -384,6 +395,59 @@ em.lv { font-style: normal; color: #FF3B30; }
     </div>
   </section>
   <footer><span>© 2026 Nino Pareshishvili</span><span>Tbilisi, Georgia</span></footer>
+</div>
+</div>
+
+<!-- UNO SELECT -->
+<div class="view" id="v-uno">
+<div class="wrap">
+  <div class="case-top">
+    <a class="back" href="#home">← All work</a>
+    <span class="mono">Insurance · Imedi L · Shipped</span>
+    <h1>UNO Select: health insurance you can buy in four steps</h1>
+    <p class="lead">Individual health insurance from Imedi L with a free choice of clinics. I designed the product page and the online purchase flow: pick a plan per person, add family members, choose how to pay and check out, on desktop and mobile.</p>
+    <a class="live" href="https://www.imedil.ge/uno-select/ge" target="_blank" rel="noopener"><i></i>See it live on imedil.ge ↗</a>
+  </div>
+  <figure class="case-hero"><img src="img/uno-cover.webp" alt="UNO Select product page: hero, plan comparison and pricing cards"></figure>
+  <div class="facts">
+    <div><span class="mono">Role</span><b>UI/UX Designer, JSC Imedi L</b></div>
+    <div><span class="mono">Platforms</span><b>Desktop and mobile web</b></div>
+    <div><span class="mono">Scope</span><b>IA, product page, purchase flow, states, components</b></div>
+    <div><span class="mono">Status</span><b>Live on imedil.ge</b></div>
+  </div>
+  <div class="stat" style="margin-top:12px">
+    <div><b>3</b><span>plans compared side by side: Select, Select+ and Select Max</span></div>
+    <div><b>4</b><span>steps: insured, policyholder, schedule, purchase</span></div>
+    <div><b>5</b><span>people covered in one purchase, each with their own plan</span></div>
+  </div>
+
+  <div class="block"><h3>The problem</h3><div class="body">
+    <p>Health insurance is hard to compare and usually bought over the phone or in an office. Three plans differ in coverage percentages that are easy to misread, and a family buying together needs different plans, add-ons and one total. <strong>The goal: let people understand the plans and buy a policy online without calling anyone.</strong></p>
+  </div></div>
+
+  <div class="block"><h3>Product page</h3><div class="body"><p>Age and citizenship go in first, so every price on the page is the person's real price. The three plans sit in identical cards with the same rows in the same order, so the difference reads across a line: outpatient, emergency, hospital, medicines, dental. Coverage, partner clinics and FAQ follow, with a call-back button always in reach.</p></div></div>
+  <figure class="shot-img"><img src="img/uno-landing.webp" alt="Add-on service, what the insurance covers, related products and FAQ" loading="lazy"></figure>
+
+  <div class="block"><h3>Information architecture</h3><div class="body"><p>Before any UI I mapped the flow screen by screen: what each element does, where every button leads, and where an error stops the user. A sticky info panel (product, provider list, terms) sits on every step and opens in a new tab, so reading the terms never breaks the purchase.</p></div></div>
+  <figure class="shot-img light"><img src="img/uno-ia.webp" alt="Information architecture of the UNO Select purchase flow, steps 1 to 5" loading="lazy"></figure>
+
+  <div class="block"><h3>Step 1 · Who is insured</h3><div class="body"><p>Each person becomes a card with their own plan and an optional personal-manager add-on (+15 ₾ a month). Prices update on the card and in the running total, so a family sees the cost grow as they add people, up to five. Edit and remove stay on the card; removing the last person returns to the empty state.</p></div></div>
+  <figure class="shot-img soft"><img src="img/uno-insured.webp" alt="Insured list with two people and per-person plans, and the add-insured form" loading="lazy"></figure>
+
+  <div class="block"><h3>Steps 3 and 4 · Pay your way</h3><div class="body"><p>The policyholder is picked from the insured people or added once. Then the schedule: monthly or one-off, with the 20% annual discount shown as money saved, plus a promo code. The review step folds each policy into an accordion with its own edit button, and payment goes by card, Apple Pay, Google Pay or crypto, with consent required before the button activates.</p></div></div>
+  <figure class="shot-img soft"><img src="img/uno-checkout.webp" alt="Payment schedule with monthly and one-off options, and the review and pay step" loading="lazy"></figure>
+
+  <div class="block"><h3>Every state drawn</h3><div class="body"><p>Rules are explained where they bite. A 65+ birth date is flagged inline with the phone number for another option, instead of failing at checkout. Success says the policy is on its way by email and SMS. A failed payment keeps everything the user entered and offers to retry or go back to the review.</p></div></div>
+  <figure class="shot-img soft"><img src="img/uno-states.webp" alt="Inline age error, payment success and payment failure screens" loading="lazy"></figure>
+
+  <div class="block"><h3>Mobile</h3><div class="body"><p>The same flow at 375 px: fields stack into one column, plan options become full-width rows, the info panel moves under the content and the footer collapses into accordions.</p></div></div>
+  <figure class="shot-img soft"><img src="img/uno-mobile.webp" alt="Three mobile screens: empty list, add-insured form and insured card with plan choice" loading="lazy"></figure>
+
+  <div class="block"><h3>What shipped</h3><div class="body">
+    <p><strong>A live product page</strong> on imedil.ge that a customer can understand without a call. <strong>A purchase flow mapped end to end,</strong> with every route, error and outcome specified for developers. <strong>Shared components</strong> (plan card, insured card, stepper, info panel) ready for Imedi L's other products.</p>
+    <p><a class="live" href="https://www.imedil.ge/uno-select/ge" target="_blank" rel="noopener"><i></i>Open the live page ↗</a></p>
+  </div></div>
+  <a class="next" href="#openfinance"><div><span class="mono">Next project</span><br><b>OpenFinance Hub</b></div><span class="arrow" aria-hidden="true">→</span></a>
 </div>
 </div>
 
@@ -528,13 +592,13 @@ em.lv { font-style: normal; color: #FF3B30; }
     <figure class="shot-img light"><img src="img/ct-map.webp" alt="CT LAB map of warehouses and sites with stock status" loading="lazy"><figcaption>Map: stock and shipments between warehouses and sites</figcaption></figure>
     <figure class="shot-img light"><img src="img/ct-kit.webp" alt="CT LAB kit detail cards" loading="lazy"><figcaption>Kit: dosage, quantity and expiry with order and reconcile actions</figcaption></figure>
   </div>
-  <a class="next" href="#openfinance"><div><span class="mono">Next project</span><br><b>OpenFinance Hub</b></div><span class="arrow" aria-hidden="true">→</span></a>
+  <a class="next" href="#uno"><div><span class="mono">Next project</span><br><b>UNO Select</b></div><span class="arrow" aria-hidden="true">→</span></a>
 </div>
 </div>
 
 <script>
 (function(){
-  var views = {  home:'v-home', work:'v-home', experience:'v-home', contact:'v-home', openfinance:'v-openfinance', gsg:'v-gsg', ctlab:'v-ctlab' };
+  var views = {  home:'v-home', work:'v-home', experience:'v-home', contact:'v-home', uno:'v-uno', openfinance:'v-openfinance', gsg:'v-gsg', ctlab:'v-ctlab' };
   var last = null;
   function route(){
     var h = (location.hash || '#home').slice(1);
