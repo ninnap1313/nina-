@@ -310,8 +310,12 @@ em.lv { font-style: normal; color: #FF3B30; }
 .live:hover { filter: brightness(1.08); }
 .live i { width: 8px; height: 8px; border-radius: 50%; background: #3DDC84; box-shadow: 0 0 0 4px rgba(61,220,132,.25); }
 .shot-img.soft { background: #EEF1F7; }
-.tile .badge { position: absolute; bottom: 18px; left: 18px; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: #fff; color: #0E1116; font: 600 12.5px/1 inherit; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
-.tile .badge i { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; }
+.tile .badge.live-badge { top: auto; left: 20px; bottom: 20px; right: auto; height: auto; width: auto; display: inline-flex; align-items: center; gap: 9px; padding: 9px 14px 9px 12px; border-radius: 999px; background: rgba(14,17,22,.72); color: #fff; border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 13px; font-weight: 600; line-height: 1; letter-spacing: .01em; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.tile .badge.live-badge i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #3DDC84; flex: none; }
+.tile .badge.live-badge i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid #3DDC84; opacity: 0; animation: livepulse 1.8s ease-out infinite; }
+.tile .badge.live-badge span { opacity: .7; font-weight: 500; }
+@keyframes livepulse { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .tile .badge.live-badge i::after { animation: none; } }
 .t-feature .art { position: relative; }
 </style>
 </head>
@@ -336,7 +340,7 @@ em.lv { font-style: normal; color: #FF3B30; }
 
   <div class="bento" id="work">
     <a class="tile t-feature" href="#uno">
-      <div class="art"><span class="badge"><i></i>Shipped · live</span><img class="fill top" src="img/uno-cover.webp" alt="UNO Select product page on imedil.ge"></div>
+      <div class="art"><span class="badge live-badge"><i></i>Live <span>· imedil.ge</span></span><img class="fill top" src="img/uno-cover.webp" alt="UNO Select product page on imedil.ge"></div>
       <div class="cap"><div><h3>UNO Select: health insurance, bought online</h3><p>Insurance · Imedi L · Product page and 4-step purchase flow · Live on imedil.ge</p></div><span class="arrow" aria-hidden="true">→</span></div>
     </a>
     
