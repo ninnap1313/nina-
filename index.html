@@ -40,7 +40,11 @@ img { max-width: 100%; display: block; }
 .nav-inner img { width: 34px; height: 34px; border-radius: 50%; }
 .nav-inner a.l { padding: 8px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 500; color: var(--muted); }
 .nav-inner a.l:hover { color: var(--ink); background: var(--bg); }
-.nav-inner a.cta { padding: 8px 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 14.5px; font-weight: 600; }
+.nav-inner a.cta { padding: 8px 16px; border-radius: 999px; color: var(--muted); font-size: 14.5px; font-weight: 500; transition: background .2s, color .2s; }
+.nav-inner a.l { transition: background .2s, color .2s; }
+.nav-inner a.l.on, .nav-inner a.cta.on { background: var(--ink); color: var(--bg); font-weight: 600; }
+.nav-inner a.cta:hover { color: var(--ink); background: var(--bg); }
+.nav-inner a.cta.on:hover, .nav-inner a.l.on:hover { background: var(--ink); color: var(--bg); }
 
 /* Views */
 .view { display: none; }
@@ -594,8 +598,15 @@ em.lv { font-style: normal; color: #FF3B30; }
     }
     if (h !== 'home' && !(h in {gsg:1,ctlab:1})) { var el = document.getElementById(h); if (el) el.scrollIntoView(); }
   }
-  window.addEventListener('hashchange', route);
-  route();
+  function mark(){
+    var h = (location.hash || '#home').slice(1);
+    var key = (h === 'experience' || h === 'contact') ? h : 'home';
+    document.querySelectorAll('.nav-inner a.l, .nav-inner a.cta').forEach(function(a){
+      a.classList.toggle('on', a.getAttribute('href') === '#' + key);
+    });
+  }
+  window.addEventListener('hashchange', function(){ route(); mark(); });
+  route(); mark();
 })();
 </script>
 </body>
